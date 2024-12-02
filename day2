@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <cmath>
+using namespace std;
+bool isSafeReport(const vector<int>& levels){
+    bool isIncreasing=false;
+    bool isDecreasing=false;
+    for(size_t i=0;i<levels.size()-1;i++){
+        int diff=levels[i+1]-levels[i];
+        if(abs(diff)<1||abs(diff)>3){
+            return false;}
+        if(diff>0){
+            isIncreasing=true;
+        } else if (diff<0){
+            isDecreasing = true;}
+    }
+return !(isIncreasing&&isDecreasing);
+}
+int main() {
+    int numReports;
+    cout<<"Introduceti numarul de rapoarte: ";
+    cin>>numReports;
+    int safeReportsCount=0;
+    for(int i=0;i<numReports;i++){
+        int numLevels;
+        cout<<"Introduceti numarul de nivele pentru raportul "<<i+1<< ": ";
+        cin >> numLevels;
+        vector<int> levels(numLevels);
+        cout<<"Introduceti nivelele pentru raportul " <<i+1<< ": ";
+        for(int j=0;j<numLevels;j++){
+            cin>>levels[j];
+        }
+        if(isSafeReport(levels)){
+            safeReportsCount++;}
+    }
+    cout<<"Numarul de rapoarte sigure este: "<<safeReportsCount<<endl;
+    return 0;
+}
